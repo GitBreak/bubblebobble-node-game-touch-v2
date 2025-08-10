@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: bubblebobble-node-game
+    env: node
+    plan: free
+    buildCommand: |
+      npm --prefix client ci || npm --prefix client install
+      npm --prefix client run build
+      npm --prefix server ci || npm --prefix server install
+    startCommand: node server/index.js
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+    autoDeploy: true

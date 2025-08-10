@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>BubbleBobble Node Game (Touch v2)</title>
+    <style>
+      :root { --pad: 14px; --btn: 64px; --btn-sm: 56px; }
+      body { margin: 0; background: #0b1020; }
+      #game { touch-action: none; }
+      .hud { position: fixed; top: 10px; left: 10px; font: 14px/1.2 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; 
+             background: rgba(0,0,0,0.45); color: #fff; padding: 6px 10px; border-radius: 10px; z-index: 10; }
+      .hud-right { position: fixed; top: 10px; right: 10px; color: #fff; font: 14px/1.2 system-ui; z-index: 10; }
+      .touch { position: fixed; inset: 0; pointer-events: none; z-index: 9; }
+      .pad-left, .pad-right, .pad-actions { position: absolute; bottom: var(--pad); display: flex; gap: var(--pad); }
+      .pad-left { left: var(--pad); }
+      .pad-right { right: var(--pad); }
+      .pad-actions { right: var(--pad); bottom: calc(var(--pad) + var(--btn) + 10px); }
+      .btn { width: var(--btn); height: var(--btn); border-radius: 50%; background: rgba(255,255,255,0.1);
+             box-shadow: 0 0 0 2px rgba(255,255,255,0.15) inset; pointer-events: auto; touch-action: none; 
+             display: grid; place-items: center; color: #fff; user-select: none; -webkit-user-select: none; }
+      .btn:active, .btn.active { background: rgba(255,255,255,0.25); }
+      .btn-sm { width: var(--btn-sm); height: var(--btn-sm); }
+      .label { font-size: 12px; opacity: 0.8; }
+      @media (min-width: 900px) { .touch { display: none; } }
+    </style>
+  </head>
+  <body>
+    <div id="game"></div>
+    <div class="hud">
+      <span id="score">Score: 0</span> · <span id="combo">Combo x1</span> · <span id="ver"></span>
+    </div>
+    <div class="hud-right"><a href="#" id="btn-levels" style="color:#9af;text-decoration:none">Level Select</a></div>
+    <div class="touch" id="touch">
+      <div class="pad-left">
+        <div class="btn" id="btn-left"><span class="label">←</span></div>
+        <div class="btn" id="btn-right"><span class="label">→</span></div>
+      </div>
+      <div class="pad-right">
+        <div class="btn btn-sm" id="btn-jump"><span class="label">JUMP</span></div>
+        <div class="btn" id="btn-shoot"><span class="label">●</span></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+    <script>document.getElementById('ver').textContent = 'v' + (window.__BUILD_VERSION__ || 'dev');</script>
+  </body>
+</html>
